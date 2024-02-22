@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './WeatherForecast.module.css';
 import icons from '../../icons/WeatherIcons';
 import getWeekDay from '../../helpers/getWeekDay';
-
-const WEATHER_API = import.meta.env.VITE_REACT_WEATHER_API;
+import { getForecastWeather } from '../../api-service/weather-api';
 
 interface Props {
   city: string;
@@ -21,13 +20,9 @@ const WeatherForecast: React.FC<Props> = ({
   const [data, setData] = useState({ city: '', forecast: [] });
 
   useEffect(() => {
-    fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=${WEATHER_API}&contentType=json`
-    )
-      .then(res => res.json())
-      .then(data =>
-        setData({ city: data.resolvedAddress, forecast: data.days })
-      );
+    getForecastWeather(city, startDate, endDate).then(data =>
+      setData({ city: data.resolvedAddress, forecast: data.days })
+    );
   }, [city]);
 
   return (

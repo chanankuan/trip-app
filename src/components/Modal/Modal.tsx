@@ -44,11 +44,13 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
   const addToDatabase = (): void => {
     const colRef = collection(db, 'trips');
     const uuid = uid();
+    const owner = JSON.parse(localStorage.getItem('userID') || '');
 
     addDoc(colRef, {
       id: uuid,
       ...formData,
       imageUrl: cities.find(({ city }) => city === formData.city)?.imageUrl,
+      owner,
     }).then(() => {
       setFormData({
         city: '',

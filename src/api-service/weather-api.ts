@@ -1,15 +1,14 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 axios.defaults.baseURL =
   'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/';
 
+const WEATHER_API = import.meta.env.VITE_REACT_WEATHER_API;
+
 // API for getting today's weather for the city
 export const getCurrentWeather = async (city: string) => {
   const { data } = await axios.get(
-    `${city}/today?unitGroup=metric&include=days&key=${process.env.WEATHER_API}&contentType=json`
+    `${city}/today?unitGroup=metric&include=days&key=${WEATHER_API}&contentType=json`
   );
 
   return data;
@@ -17,11 +16,11 @@ export const getCurrentWeather = async (city: string) => {
 
 export const getForecastWeather = async (
   city: string,
-  from: Date,
-  to: Date
+  startDate: string,
+  endDate: string
 ) => {
   const { data } = await axios.get(
-    `${city}/today?unitGroup=metric&include=days&key=${process.env.WEATHER_API}&contentType=json`
+    `${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=${WEATHER_API}&contentType=json`
   );
 
   return data;

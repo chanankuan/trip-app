@@ -3,14 +3,16 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
+const FIREBASE_API = import.meta.env.VITE_REACT_FIREBASE_API;
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyCy9858QMjHXQZcKwg6TFoT5SZxqCbSAeU',
-  authDomain: 'trip-app-57adc.firebaseapp.com',
-  projectId: 'trip-app-57adc',
-  storageBucket: 'trip-app-57adc.appspot.com',
-  messagingSenderId: '2077667333',
-  appId: '1:2077667333:web:ce2fcdc0325c2fe6672c6c',
-  measurementId: 'G-QF0X9Y54V4',
+  apiKey: FIREBASE_API,
+  authDomain: 'trip-app-project-32b5e.firebaseapp.com',
+  projectId: 'trip-app-project-32b5e',
+  storageBucket: 'trip-app-project-32b5e.appspot.com',
+  messagingSenderId: '845344597407',
+  appId: '1:845344597407:web:5e45015366cd28b31c49aa',
+  measurementId: 'G-HBJNHEKYY0',
 };
 
 // Initialize Firebase
