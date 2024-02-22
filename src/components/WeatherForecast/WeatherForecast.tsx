@@ -8,14 +8,14 @@ interface Props {
   city: string;
   startDate: string;
   endDate: string;
-  isActive: boolean;
+  isActive?: boolean;
 }
 
 const WeatherForecast: React.FC<Props> = ({
   city,
   startDate,
   endDate,
-  isActive,
+  // isActive,
 }) => {
   const [data, setData] = useState({ city: '', forecast: [] });
 

@@ -16,7 +16,7 @@ const Trip: React.FC<Props> = ({
   imageUrl,
   startDate,
   endDate,
-  isActive,
+  // isActive,
   onShow,
 }) => {
   const datetime = `${changeDateFormat(startDate)} - ${changeDateFormat(
@@ -24,6 +24,9 @@ const Trip: React.FC<Props> = ({
   )}`;
   return (
     <div className={styles.wrapper} onClick={onShow}>
+      <div className={styles.hoverElement}>
+        <button className={styles.deleteBtn}>Delete</button>
+      </div>
       <img
         className={styles.cover}
         src={imageUrl}

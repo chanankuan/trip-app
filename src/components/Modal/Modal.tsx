@@ -1,4 +1,4 @@
-import React, { FormEvent, MouseEvent, useEffect, useState } from 'react';
+import React, { FormEvent, MouseEvent, useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
 import { addDoc, collection } from 'firebase/firestore';
 import { uid } from 'uid';
