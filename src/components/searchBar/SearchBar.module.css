@@ -1,0 +1,17 @@
+.form__input {
+  font-size: 12px;
+  background: url('/public//assets/magnifying-glass-solid.svg') center left 12px
+    no-repeat;
+  background-color: #f5f7f8;
+  background-size: 12px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  min-width: 220px;
+  padding: 12px 12px 12px 30px;
+  margin-bottom: 50px;
+}
+
+.form__input::placeholder {
+  color: #000000;
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id": 0,
+    "city": "Antwerp",
+    "imageUrl": "https://cdn.pixabay.com/photo/2020/01/14/18/16/harbour-masters-office-4765840_640.jpg"
+  },
+  {
+    "id": 1,
+    "city": "Athens",
+    "imageUrl": "https://cdn.pixabay.com/photo/2017/09/07/16/50/acropolis-2725918_1280.jpg"
+  },
+  {
+    "id": 2,
+    "city": "Copenhagen",
+    "imageUrl": "https://cdn.pixabay.com/photo/2021/04/08/23/10/town-6162987_640.jpg"
+  },
+  {
+    "id": 3,
+    "city": "Lisabon",
+    "imageUrl": "https://cdn.pixabay.com/photo/2018/01/21/17/43/lisbon-3097112_640.jpg"
+  },
+  {
+    "id": 4,
+    "city": "Oslo",
+    "imageUrl": "https://cdn.pixabay.com/photo/2015/09/25/12/08/oslo-957234_640.jpg"
+  },
+  {
+    "id": 5,
+    "city": "Rome",
+    "imageUrl": "https://cdn.pixabay.com/photo/2020/03/31/23/27/rome-4989538_640.jpg"
+  },
+  {
+    "id": 6,
+    "city": "Milan",
+    "imageUrl": "https://cdn.pixabay.com/photo/2018/07/08/10/26/italy-3523635_640.jpg"
+  },
+  {
+    "id": 7,
+    "city": "Los Angeles",
+    "imageUrl": "https://cdn.pixabay.com/photo/2016/08/16/17/32/hollywood-sign-1598473_640.jpg"
+  },
+  {
+    "id": 8,
+    "city": "Berlin",
+    "imageUrl": "https://cdn.pixabay.com/photo/2020/05/01/15/18/brand-front-of-the-brandenburg-gate-5117579_640.jpg"
+  },
+  {
+    "id": 9,
+    "city": "Budapest",
+    "imageUrl": "https://cdn.pixabay.com/photo/2022/01/12/18/45/hungarian-parliament-building-6933621_640.jpg"
+  },
+  {
+    "id": 10,
+    "city": "Venice",
+    "imageUrl": "https://cdn.pixabay.com/photo/2020/04/25/13/15/venice-5090764_640.jpg"
+  },
+  {
+    "id": 11,
+    "city": "Kyiv",
+    "imageUrl": "https://cdn.pixabay.com/photo/2022/04/08/21/04/buildings-7120297_640.jpg"
+  },
+  {
+    "id": 12,
+    "city": "Vienna",
+    "imageUrl": "https://cdn.pixabay.com/photo/2019/08/13/17/17/vienna-state-opera-4403839_640.jpg"
+  },
+  {
+    "id": 13,
+    "city": "Tokyo",
+    "imageUrl": "https://cdn.pixabay.com/photo/2019/07/23/22/19/tokyo-4358758_640.jpg"
+  },
+  {
+    "id": 14,
+    "city": "London",
+    "imageUrl": "https://cdn.pixabay.com/photo/2018/01/12/11/55/london-3078109_640.jpg"
+  },
+  {
+    "id": 15,
+    "city": "Sydney",
+    "imageUrl": "https://cdn.pixabay.com/photo/2018/08/14/09/34/sydney-3605032_640.jpg"
+  },
+  {
+    "id": 16,
+    "city": "Barcelona",
+    "imageUrl": "https://cdn.pixabay.com/photo/2014/11/30/20/46/sagrada-familia-552084_640.jpg"
+  },
+  {
+    "id": 17,
+    "city": "Stockholm",
+    "imageUrl": "https://cdn.pixabay.com/photo/2020/01/01/18/11/train-4734116_640.jpg"
+  },
+  {
+    "id": 18,
+    "city": "Prague",
+    "imageUrl": "https://cdn.pixabay.com/photo/2017/12/10/17/40/prague-3010407_1280.jpg"
+  },
+  {
+    "id": 19,
+    "city": "Paris",
+    "imageUrl": "https://cdn.pixabay.com/photo/2018/04/25/09/26/eiffel-tower-3349075_640.jpg"
+  }
+]

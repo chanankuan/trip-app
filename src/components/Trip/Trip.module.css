@@ -1,0 +1,32 @@
+.wrapper {
+  cursor: pointer;
+}
+
+.wrapper:hover .body,
+.wrapper:focus .body {
+  border-color: #4285f4;
+  /* border-top: none; */
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.body {
+  padding: 20px;
+  border: 1px solid #d3d3d3;
+  transition: border-color 200ms ease-in-out;
+  /* border-top: none; */
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.datetime {
+  color: #888;
+  margin: 0;
+  font-size: 12px;
+}

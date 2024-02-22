@@ -1,0 +1,7 @@
+.list {
+  display: flex;
+  overflow-x: auto;
+  column-gap: 40px;
+  padding-bottom: 20px;
+  margin-bottom: 50px;
+}

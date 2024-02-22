@@ -1,0 +1,30 @@
+[
+  {
+    "id": 0,
+    "city": "Berlin",
+    "imageUrl": "https://cdn.pixabay.com/photo/2020/05/01/15/18/brand-front-of-the-brandenburg-gate-5117579_640.jpg",
+    "startDate": "2024-02-22",
+    "endDate": "2024-02-28"
+  },
+  {
+    "id": 1,
+    "city": "Paris",
+    "imageUrl": "https://cdn.pixabay.com/photo/2018/04/25/09/26/eiffel-tower-3349075_640.jpg",
+    "startDate": "2024-02-24",
+    "endDate": "2024-02-26"
+  },
+  {
+    "id": 2,
+    "city": "Barcelona",
+    "imageUrl": "https://cdn.pixabay.com/photo/2014/11/30/20/46/sagrada-familia-552084_640.jpg",
+    "startDate": "2024-02-25",
+    "endDate": "2024-02-28"
+  },
+  {
+    "id": 3,
+    "city": "Milan",
+    "imageUrl": "https://cdn.pixabay.com/photo/2018/07/08/10/26/italy-3523635_640.jpg",
+    "startDate": "2024-02-29",
+    "endDate": "2024-03-02"
+  }
+]

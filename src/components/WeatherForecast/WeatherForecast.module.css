@@ -1,0 +1,26 @@
+.list {
+  display: flex;
+  column-gap: 40px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+}
+
+.title {
+  margin-bottom: 50px;
+}
+
+.day {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: auto;
+}
+
+.temp {
+  margin-top: auto;
+}
