@@ -16,7 +16,7 @@ import Trip from '../Trip/Trip';
 import WeatherForecast from '../WeatherForecast/WeatherForecast';
 import WeatherToday from '../WeatherToday/WeatherToday';
 import Modal from '../Modal/Modal';
-import SearchBar from '../SearchBar/Searchbar';
+import SearchBar from '../../components/SearchBar/Searchbar';
 
 interface ITrip {
   id: string;
