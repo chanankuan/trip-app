@@ -19,10 +19,16 @@
   }
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  padding-right: 30px;
+}
+
 .title {
   font-size: 28px;
   font-weight: normal;
-  margin-bottom: 50px;
 }
 
 .span {
@@ -42,13 +48,13 @@
   cursor: pointer;
 }
 
-.signIn {
+.signIn,
+.logout {
   cursor: pointer;
   border: 0;
   border-radius: 4px;
   font-weight: 600;
   margin: 0 10px;
-  width: 200px;
   padding: 10px 0;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
   transition: 0.4s;
@@ -57,7 +63,16 @@
   border: 1px solid rgba(104, 85, 224, 1);
 }
 
-.signIn:hover {
+.signIn {
+  width: 200px;
+}
+
+.logout {
+  width: 100px;
+}
+
+.signIn:hover,
+.logout:hover {
   color: white;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
   background-color: rgba(104, 85, 224, 1);

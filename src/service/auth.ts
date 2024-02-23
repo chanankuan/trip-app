@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { auth } from '../server/firebase';
 
 const signInWithGoogle = async () => {
@@ -18,7 +18,12 @@ const signInWithGoogle = async () => {
     // The AuthCredential type that was used.
     // const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
+    alert('Oops, something went wrong. Please refresh the page.');
   }
 };
 
-export default signInWithGoogle;
+const signOutWithGoogle = (): void => {
+  signOut(auth);
+};
+
+export default { signInWithGoogle, signOutWithGoogle };

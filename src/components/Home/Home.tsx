@@ -16,6 +16,7 @@ import WeatherForecast from '../../components/WeatherForecast/WeatherForecast';
 import Modal from '../Modal/Modal';
 import { db } from '../../server/firebase';
 import WeatherToday from '../WeatherToday/WeatherToday';
+import auth from '../../service/auth';
 
 interface ITrip {
   id: string;
@@ -48,6 +49,7 @@ const Home: React.FC = () => {
     e:
       | MouseEvent<HTMLDivElement | HTMLButtonElement>
       | FormEvent<HTMLFormElement>
+      | KeyboardEvent
   ) => {
     e.stopPropagation();
     setIsModalOpen(false);
@@ -86,9 +88,14 @@ const Home: React.FC = () => {
   return (
     <>
       <div className={styles.container}>
-        <h1 className={styles.title}>
-          Weather <span className={styles.span}>Forecast</span>
-        </h1>
+        <div className={styles.header}>
+          <h1 className={styles.title}>
+            Weather <span className={styles.span}>Forecast</span>
+          </h1>
+          <button className={styles.logout} onClick={auth.signOutWithGoogle}>
+            Logout
+          </button>
+        </div>
 
         <SearchBar onFilterChange={onFilterChange} />
 

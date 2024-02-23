@@ -1,5 +1,5 @@
 import React from 'react';
-import signInWithGoogle from '../../helpers/signIn';
+import auth from '../../service/auth';
 import styles from './SignIn.module.css';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 const SignIn: React.FC<Props> = ({ handleSignIn }) => {
   const onSignIn = () => {
-    signInWithGoogle();
+    auth.signInWithGoogle();
     handleSignIn(true);
   };
 
