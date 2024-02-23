@@ -1,29 +1,41 @@
-import React, { FormEvent, MouseEvent, useState } from 'react';
+import React, { FormEvent, MouseEvent, useEffect, useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
 import styles from './Modal.module.css';
 import cities from '../../data/cities.json';
 import { addTrip } from '../../service/trips-service';
+import { validateBody } from '../../helpers/validateBody';
 
 interface Props {
   onCloseModal: (
     e:
       | MouseEvent<HTMLDivElement | HTMLButtonElement>
       | FormEvent<HTMLFormElement>
+      | KeyboardEvent
   ) => void;
 }
 
 const Modal: React.FC<Props> = ({ onCloseModal }) => {
   const [formData, setFormData] = useState({
     city: '',
-    imageUrl: '',
     startDate: '',
     endDate: '',
   });
 
-  const today = new Date();
-  const fortnight = new Date(Date.now() + 1000 * 60 * 60 * 24 * 14);
-  const minDate = today.toISOString().split('T')[0];
-  const maxDate = fortnight.toISOString().split('T')[0];
+  const today: Date = new Date();
+  const fortnight: Date = new Date(Date.now() + 1000 * 60 * 60 * 24 * 14);
+  const minDate: string = today.toISOString().split('T')[0];
+  const maxDate: string = fortnight.toISOString().split('T')[0];
+
+  // close modal on Escape
+  useEffect(() => {
+    const close = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onCloseModal(e);
+      }
+    };
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
+  }, []);
 
   const handleChange = (
     event: FormEvent<HTMLInputElement | HTMLSelectElement>
@@ -40,12 +52,16 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (!validateBody(formData)) {
+      alert('Fields must not be empty');
+      return;
+    }
+
     try {
       await addTrip(formData);
 
       setFormData({
         city: '',
-        imageUrl: '',
         startDate: '',
         endDate: '',
       });
@@ -129,6 +145,7 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
             <button
               type="button"
               className={`${styles.button} ${styles.cancel}`}
+              onClick={onCloseModal}
             >
               Cancel
             </button>

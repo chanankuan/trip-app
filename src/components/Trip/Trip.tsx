@@ -1,5 +1,6 @@
 import React, { MouseEvent } from 'react';
 import { FaRegTrashCan } from 'react-icons/fa6';
+import { IconContext } from 'react-icons';
 import styles from './Trip.module.css';
 import changeDateFormat from '../../helpers/changeDateFormat';
 import { deleteTrip } from '../../service/trips-service';
@@ -32,12 +33,14 @@ const Trip: React.FC<Props> = ({
       onClick={onShow}
     >
       <div className={styles.hoverElement}>
-        <button
-          className={styles.deleteBtn}
-          onClick={(e: MouseEvent<HTMLButtonElement>) => deleteTrip(e, id)}
-        >
-          <FaRegTrashCan />
-        </button>
+        <IconContext.Provider value={{ color: '#fff' }}>
+          <button
+            className={styles.deleteBtn}
+            onClick={(e: MouseEvent<HTMLButtonElement>) => deleteTrip(e, id)}
+          >
+            <FaRegTrashCan />
+          </button>
+        </IconContext.Provider>
       </div>
       <img
         className={styles.cover}

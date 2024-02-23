@@ -8,7 +8,7 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import styles from './Home.module.css';
-import SearchBar from '../../components/searchBar/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 import CardList from '../../components/CardList/CardList';
 import CardItem from '../../components/CardItem/CardItem';
 import Trip from '../../components/Trip/Trip';
