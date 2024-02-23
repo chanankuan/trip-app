@@ -19,13 +19,13 @@ import Modal from '../Modal/Modal';
 >>>>>>> parent of ae5e79f (Bugs fixed)
 import { db } from '../../server/firebase';
 import auth from '../../service/auth';
+import SearchBar from '../SearchBar/SearchBar';
 import CardList from '../CardList/CardList';
 import CardItem from '../CardItem/CardItem';
 import Trip from '../Trip/Trip';
 import WeatherForecast from '../WeatherForecast/WeatherForecast';
 import WeatherToday from '../WeatherToday/WeatherToday';
 import Modal from '../Modal/Modal';
-import SearchBar from '../SearchBar/SearchBar';
 
 interface ITrip {
   id: string;
