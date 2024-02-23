@@ -4,9 +4,9 @@
 }
 
 .wrapper:hover .body,
-.wrapper:focus .body {
+.wrapper:focus .body,
+.wrapper.active .body {
   border-color: #4285f4;
-  /* border-top: none; */
 }
 
 .hoverElement {
@@ -34,7 +34,6 @@
   padding: 20px;
   border: 1px solid #d3d3d3;
   transition: border-color 200ms ease-in-out;
-  /* border-top: none; */
 }
 
 .title {
@@ -52,4 +51,10 @@
 .deleteBtn {
   border: none;
   background-color: transparent;
+  transition: transform 200ms ease-in-out;
+}
+
+.deleteBtn:hover,
+.deleteBtn:focus {
+  transform: scale(1.1);
 }

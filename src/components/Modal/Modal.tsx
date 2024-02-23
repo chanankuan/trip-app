@@ -1,11 +1,8 @@
 import React, { FormEvent, MouseEvent, useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
-import { addDoc, collection } from 'firebase/firestore';
-import { uid } from 'uid';
-
-import { db } from '../../server/firebase';
 import styles from './Modal.module.css';
 import cities from '../../data/cities.json';
+import { addTrip } from '../../service/trips-service';
 
 interface Props {
   onCloseModal: (
@@ -40,30 +37,20 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
     setFormData(prevFormDate => ({ ...prevFormDate, endDate: '' }));
   }
 
-  // write
-  const addToDatabase = (): void => {
-    const colRef = collection(db, 'trips');
-    const uuid = uid();
-    const owner = JSON.parse(localStorage.getItem('userID') || '');
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    addDoc(colRef, {
-      id: uuid,
-      ...formData,
-      imageUrl: cities.find(({ city }) => city === formData.city)?.imageUrl,
-      owner,
-    }).then(() => {
+    try {
+      await addTrip(formData);
+
       setFormData({
         city: '',
         imageUrl: '',
         startDate: '',
         endDate: '',
       });
-    });
-  };
+    } catch (error) {}
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    addToDatabase();
     onCloseModal(event);
   };
 

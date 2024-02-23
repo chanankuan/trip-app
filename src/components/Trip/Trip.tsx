@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
+import { FaRegTrashCan } from 'react-icons/fa6';
 import styles from './Trip.module.css';
 import changeDateFormat from '../../helpers/changeDateFormat';
+import { deleteTrip } from '../../service/trips-service';
 
 interface Props {
   imageUrl: string;
@@ -8,6 +10,7 @@ interface Props {
   startDate: string;
   endDate: string;
   isActive: boolean;
+  id: string;
   onShow: () => void;
 }
 
@@ -16,16 +19,25 @@ const Trip: React.FC<Props> = ({
   imageUrl,
   startDate,
   endDate,
-  // isActive,
+  isActive,
+  id,
   onShow,
 }) => {
   const datetime = `${changeDateFormat(startDate)} - ${changeDateFormat(
     endDate
   )}`;
   return (
-    <div className={styles.wrapper} onClick={onShow}>
+    <div
+      className={`${styles.wrapper} ${isActive && styles.active}`}
+      onClick={onShow}
+    >
       <div className={styles.hoverElement}>
-        <button className={styles.deleteBtn}>Delete</button>
+        <button
+          className={styles.deleteBtn}
+          onClick={(e: MouseEvent<HTMLButtonElement>) => deleteTrip(e, id)}
+        >
+          <FaRegTrashCan />
+        </button>
       </div>
       <img
         className={styles.cover}

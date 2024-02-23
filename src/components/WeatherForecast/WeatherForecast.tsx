@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './WeatherForecast.module.css';
 import icons from '../../icons/WeatherIcons';
 import getWeekDay from '../../helpers/getWeekDay';
-import { getForecastWeather } from '../../api-service/weather-api';
+import { getForecastWeather } from '../../service/weather-api';
 
 interface Props {
   city: string;

@@ -2,20 +2,20 @@ import React, { useState, useEffect, MouseEvent, FormEvent } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import {
   collection,
-  onSnapshot,
-  query,
   where,
   orderBy,
+  query,
+  onSnapshot,
 } from 'firebase/firestore';
-
 import styles from './Home.module.css';
-import { db } from '../../server/firebase';
 import SearchBar from '../../components/searchBar/SearchBar';
 import CardList from '../../components/CardList/CardList';
 import CardItem from '../../components/CardItem/CardItem';
 import Trip from '../../components/Trip/Trip';
 import WeatherForecast from '../../components/WeatherForecast/WeatherForecast';
 import Modal from '../Modal/Modal';
+import { db } from '../../server/firebase';
+import WeatherToday from '../WeatherToday/WeatherToday';
 
 interface ITrip {
   id: string;
@@ -101,6 +101,7 @@ const Home: React.FC = () => {
                   imageUrl={imageUrl}
                   startDate={startDate}
                   endDate={endDate}
+                  id={id}
                   isActive={activeIndex === id}
                   onShow={() => setActiveIndex(id)}
                 />
@@ -124,6 +125,12 @@ const Home: React.FC = () => {
           />
         )}
       </div>
+
+      <WeatherToday
+        city={selectedTrip?.city || ''}
+        startDate={selectedTrip?.startDate || ''}
+        isActive={activeIndex !== null}
+      />
 
       {isModalOpen && <Modal onCloseModal={closeModal} />}
     </>
