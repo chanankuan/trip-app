@@ -1,11 +1,11 @@
 import React, { useState, ChangeEvent } from 'react';
-import styles from './SearchBar.module.css';
+import styles from './Filter.module.css';
 
 interface Props {
   onFilterChange: (value: string) => void;
 }
 
-const SearchBar: React.FC<Props> = ({ onFilterChange }) => {
+const Filter: React.FC<Props> = ({ onFilterChange }) => {
   const [input, setInput] = useState<string>('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -25,4 +25,4 @@ const SearchBar: React.FC<Props> = ({ onFilterChange }) => {
   );
 };
 
-export default SearchBar;
+export default Filter;

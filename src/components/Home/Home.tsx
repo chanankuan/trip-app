@@ -12,11 +12,11 @@ import { db } from '../../server/firebase';
 import auth from '../../service/auth';
 import CardItem from '../CardItem/CardItem';
 import CardList from '../CardList/CardList';
-import SearchBar from '../SearchBar/Searchbar';
 import WeatherForecast from '../WeatherForecast/WeatherForecast';
 import WeatherToday from '../WeatherToday/WeatherToday';
 import Modal from '../Modal/Modal';
 import Trip from '../Trip/Trip';
+import Filter from '../Filter/Filter';
 
 interface ITrip {
   id: string;
@@ -97,7 +97,7 @@ const Home: React.FC = () => {
           </button>
         </div>
 
-        <SearchBar onFilterChange={onFilterChange} />
+        <Filter onFilterChange={onFilterChange} />
 
         <CardList>
           {filteredTrips.map(({ id, city, imageUrl, startDate, endDate }) => {
