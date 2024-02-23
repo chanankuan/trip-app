@@ -1,6 +1,7 @@
 .form__input {
   font-size: 12px;
-  background: url('/magnifying-glass-solid.svg') center left 12px no-repeat;
+  background: url('/public//assets/magnifying-glass-solid.svg') center left 12px
+    no-repeat;
   background-color: #f5f7f8;
   background-size: 12px;
   border: none;

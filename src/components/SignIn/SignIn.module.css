@@ -4,9 +4,8 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: url('../../assets/AdobeStock_701834926.jpeg') center no-repeat;
-  background-size: cover;
-  padding: 300px;
+  background-color: lightblue;
+  padding: 100px;
 }
 
 .title {
