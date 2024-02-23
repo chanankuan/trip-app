@@ -1,0 +1,38 @@
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('/src//assets//clouds.jpeg') center no-repeat;
+  background-size: cover;
+}
+
+.wrapper {
+  display: flex;
+  column-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.temp {
+  font-size: 48px;
+}
+
+.temp > sup {
+  vertical-align: super;
+  font-size: 16px;
+}
+
+.city {
+  font-size: 24px;
+  margin-bottom: 100px;
+}
