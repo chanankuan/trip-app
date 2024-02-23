@@ -1,5 +1,6 @@
 /// <reference types="vite-plugin-svgr/client" />
 
+import { ReactElement } from 'react';
 import ClearDay from '../assets/weather-icons/clear-day.svg?react';
 import ClearNight from '../assets/weather-icons/clear-night.svg?react';
 import Cloudy from '../assets/weather-icons/cloudy.svg?react';
@@ -23,7 +24,11 @@ import ThunderShowersNight from '../assets/weather-icons/thunder-showers-night.s
 import Thunder from '../assets/weather-icons/thunder.svg?react';
 import Wind from '../assets/weather-icons/wind.svg?react';
 
-export default {
+interface WeatherIcons {
+  [key: string]: ReactElement;
+}
+
+const weatherIcons: WeatherIcons = {
   'clear-day': <ClearDay width={40} />,
   'clear-night': <ClearNight width={40} />,
   cloudy: <Cloudy width={40} />,
@@ -47,3 +52,5 @@ export default {
   thunder: <Thunder width={40} />,
   wind: <Wind width={40} />,
 };
+
+export default weatherIcons;
