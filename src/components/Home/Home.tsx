@@ -8,24 +8,15 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import styles from './Home.module.css';
-<<<<<<< HEAD
-=======
-import SearchBar from '../../components/searchBar/SearchBar';
-import CardList from '../../components/CardList/CardList';
-import CardItem from '../../components/CardItem/CardItem';
-import Trip from '../../components/Trip/Trip';
-import WeatherForecast from '../../components/WeatherForecast/WeatherForecast';
-import Modal from '../Modal/Modal';
->>>>>>> parent of ae5e79f (Bugs fixed)
 import { db } from '../../server/firebase';
 import auth from '../../service/auth';
-import SearchBar from '../SearchBar/SearchBar';
-import CardList from '../CardList/CardList';
 import CardItem from '../CardItem/CardItem';
-import Trip from '../Trip/Trip';
+import CardList from '../CardList/CardList';
+import SearchBar from '../SearchBar/Searchbar';
 import WeatherForecast from '../WeatherForecast/WeatherForecast';
 import WeatherToday from '../WeatherToday/WeatherToday';
 import Modal from '../Modal/Modal';
+import Trip from '../Trip/Trip';
 
 interface ITrip {
   id: string;
