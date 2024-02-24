@@ -1,15 +1,11 @@
-import React, { FormEvent, MouseEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
 import styles from './Modal.module.css';
 import cities from '../../data/cities.json';
 import { addTrip } from '../../service/trips-service';
 
 interface Props {
-  onCloseModal: (
-    e:
-      | MouseEvent<HTMLDivElement | HTMLButtonElement>
-      | FormEvent<HTMLFormElement>
-  ) => void;
+  onCloseModal: () => void;
 }
 
 type ITrip = {
@@ -33,6 +29,16 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
   const fortnight: Date = new Date(Date.now() + 1000 * 60 * 60 * 24 * 14);
   const minDate: string = today.toISOString().split('T')[0];
   const maxDate: string = fortnight.toISOString().split('T')[0];
+
+  useEffect(() => {
+    const closeOnEscapePressed = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onCloseModal();
+      }
+    };
+    window.addEventListener('keydown', closeOnEscapePressed);
+    return () => window.removeEventListener('keydown', closeOnEscapePressed);
+  }, []);
 
   const handleChange = (
     event: FormEvent<HTMLInputElement | HTMLSelectElement>
@@ -59,7 +65,7 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
       alert('Oops, something went wrong. Please refresh the page.');
     }
 
-    onCloseModal(event);
+    onCloseModal();
   };
 
   return (
@@ -137,6 +143,7 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
             <button
               type="button"
               className={`${styles.button} ${styles.cancel}`}
+              onClick={onCloseModal}
             >
               Cancel
             </button>

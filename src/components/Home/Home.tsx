@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  MouseEvent,
-  FormEvent,
-  useContext,
-} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import {
   collection,
@@ -26,22 +20,24 @@ import WeatherToday from '../WeatherToday/WeatherToday';
 import Modal from '../Modal/Modal';
 import Trip from '../Trip/Trip';
 import Filter from '../Filter/Filter';
+import { defaultTrip } from '../../data/defaultTrip';
+import { addTrip } from '../../service/trips-service';
 
-type ITrip = {
+export type Trip = {
   id: string;
   city: string;
   imageUrl: string;
   startDate: string;
   endDate: string;
-  owner: string;
+  owner?: string;
 };
 
 const Home: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [trips, setTrips] = useState<ITrip[]>([]);
+  const [trips, setTrips] = useState<Trip[]>([]);
   const [filter, setFilter] = useState<string>('');
   const [activeIndex, setActiveIndex] = useState<string | null>(null);
-  const context = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
 
   const onFilterChange = (value: string): void => {
     setFilter(value);
@@ -51,7 +47,7 @@ const Home: React.FC = () => {
   const handleSignOut = async (): Promise<void> => {
     try {
       await auth.signOutWithGoogle();
-      context?.setUser(defaultValue);
+      authContext?.setUser(defaultValue);
     } catch (error) {
       alert('Oops, something went wrong. Please refresh the page.');
     }
@@ -63,22 +59,18 @@ const Home: React.FC = () => {
   };
 
   // close modal fn
-  const closeModal = (
-    e:
-      | MouseEvent<HTMLDivElement | HTMLButtonElement>
-      | FormEvent<HTMLFormElement>
-      | KeyboardEvent
-  ): void => {
-    e.stopPropagation();
+  const closeModal = (): void => {
     setIsModalOpen(false);
   };
 
   // get data from firebase
   useEffect(() => {
-    const storageData: string | null = localStorage.getItem('uid');
-    if (!storageData) return;
+    const uid_json: string | null = localStorage.getItem('uid');
+    if (!uid_json) return;
+    const firstauth_json: string | null =
+      localStorage.getItem('firstauth') ?? '';
 
-    const userId: string = JSON.parse(storageData);
+    const userId: string = JSON.parse(uid_json);
     const colRef = collection(db, 'trips');
     const q = query(
       colRef,
@@ -86,25 +78,31 @@ const Home: React.FC = () => {
       orderBy('startDate', 'asc')
     );
 
+    const isFirstAuth: string = JSON.parse(firstauth_json);
+    if (isFirstAuth) {
+      addTrip(defaultTrip);
+      localStorage.setItem('firstauth', JSON.stringify(false));
+    }
+
     onSnapshot(q, snapshot => {
-      let trips: ITrip[] = [];
+      let trips: Trip[] = [];
 
       snapshot.docs.forEach(doc => {
-        const tripData = doc.data() as ITrip;
+        const tripData = doc.data() as Trip;
         trips.push({ ...tripData, id: doc.id });
       });
 
       setTrips(trips);
     });
-  }, []);
+  }, [authContext?.user]);
 
   // filter trips
-  const filteredTrips: ITrip[] = trips.filter(trip =>
+  const filteredTrips: Trip[] = trips.filter(trip =>
     trip.city.toLowerCase().includes(filter.toLowerCase())
   );
 
   // get trip data which is selected
-  const selectedTrip: ITrip | undefined = trips.find(
+  const selectedTrip: Trip | undefined = trips.find(
     trip => trip.id === activeIndex
   );
 

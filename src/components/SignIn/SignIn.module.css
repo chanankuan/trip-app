@@ -6,7 +6,7 @@
   height: 100vh;
   background: url('../../assets/AdobeStock_701834926.jpeg') left no-repeat;
   background-size: cover;
-  padding: 300px;
+  padding: 300px 0;
 }
 
 .title {
@@ -14,9 +14,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 48px;
+  font-size: 40px;
   color: #fff;
   text-align: center;
+  @media screen and (min-width: 768px) {
+    font-size: 48px;
+  }
 }
 
 .signIn {

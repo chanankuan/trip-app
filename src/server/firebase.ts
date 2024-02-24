@@ -7,12 +7,12 @@ const FIREBASE_API = import.meta.env.VITE_REACT_FIREBASE_API;
 
 const firebaseConfig = {
   apiKey: FIREBASE_API,
-  authDomain: 'trip-app-project-32b5e.firebaseapp.com',
-  projectId: 'trip-app-project-32b5e',
-  storageBucket: 'trip-app-project-32b5e.appspot.com',
-  messagingSenderId: '845344597407',
-  appId: '1:845344597407:web:5e45015366cd28b31c49aa',
-  measurementId: 'G-HBJNHEKYY0',
+  authDomain: 'trip-app-57adc.firebaseapp.com',
+  projectId: 'trip-app-57adc',
+  storageBucket: 'trip-app-57adc.appspot.com',
+  messagingSenderId: '2077667333',
+  appId: '1:2077667333:web:e9de772417a94127672c6c',
+  measurementId: 'G-CF9R44NLDG',
 };
 
 // Initialize Firebase
