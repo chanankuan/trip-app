@@ -49,21 +49,48 @@
   margin-bottom: 10px;
 }
 
-.formInput {
+.formInput,
+.formSelect {
   width: 100%;
+  height: 40px;
   margin: 0;
-  padding: 5px;
+  padding: 5px 10px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  outline: none;
 }
 
-.formInput option:first-child {
+.formSelect {
+  appearance: none;
+  -moz-appearance: none;
+  background: url('/src/assets/chevron-down-solid.svg') right 10px center
+    no-repeat;
+  background-size: 16px;
+}
+
+.formSelect::placeholder {
   color: #888;
 }
 
-input[type='date']::-webkit-datetime-edit-text,
-input[type='date']::-webkit-datetime-edit-month-field,
-input[type='date']::-webkit-datetime-edit-day-field,
-input[type='date']::-webkit-datetime-edit-year-field {
-  color: #888;
+input[name='startDate'],
+input[name='endDate'] {
+  appearance: url('/src/assets/calendar-regular.svg') right 10px center
+    no-repeat;
+  background-size: 16px;
+}
+
+.openButton {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  pointer-events: none;
+  padding: 0;
+  border: none;
+  background: transparent;
 }
 
 .button {

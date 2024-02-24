@@ -3,27 +3,26 @@ import { FaXmark } from 'react-icons/fa6';
 import styles from './Modal.module.css';
 import cities from '../../data/cities.json';
 import { addTrip } from '../../service/trips-service';
+import { validateBody } from '../../helpers/validateBody';
 
 interface Props {
   onCloseModal: () => void;
 }
 
-type ITrip = {
+export type Trip = {
   city: string;
-  imageUrl: string;
   startDate: string;
   endDate: string;
 };
 
-const initialData: ITrip = {
+const initialData: Trip = {
   city: '',
-  imageUrl: '',
   startDate: '',
   endDate: '',
 };
 
 const Modal: React.FC<Props> = ({ onCloseModal }) => {
-  const [formData, setFormData] = useState<ITrip>(initialData);
+  const [formData, setFormData] = useState<Trip>(initialData);
 
   const today: Date = new Date();
   const fortnight: Date = new Date(Date.now() + 1000 * 60 * 60 * 24 * 14);
@@ -40,6 +39,7 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
     return () => window.removeEventListener('keydown', closeOnEscapePressed);
   }, []);
 
+  // form onChange
   const handleChange = (
     event: FormEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {
@@ -52,20 +52,26 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
     setFormData(prevFormDate => ({ ...prevFormDate, endDate: '' }));
   }
 
+  // submit form
   const handleSubmit = async (
     event: FormEvent<HTMLFormElement>
   ): Promise<void> => {
     event.preventDefault();
 
-    try {
-      await addTrip(formData);
-
-      setFormData(initialData);
-    } catch (error) {
-      alert('Oops, something went wrong. Please refresh the page.');
+    const isValid = validateBody(formData);
+    if (!isValid) {
+      alert('Fields must not be empty');
+      return;
     }
 
-    onCloseModal();
+    try {
+      await addTrip(formData);
+    } catch (error) {
+      alert('Oops, something went wrong. Please refresh the page.');
+    } finally {
+      setFormData(initialData);
+      onCloseModal();
+    }
   };
 
   return (
@@ -85,13 +91,15 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
                 <sup className={styles.sup}>*</sup>City
               </label>
               <select
-                className={styles.formInput}
+                className={styles.formSelect}
                 name="city"
                 id="city"
                 onChange={handleChange}
                 value={formData.city}
               >
-                <option value="">Please select a city</option>
+                <option value="" disabled>
+                  Please select a city
+                </option>
                 {cities.map(({ city }) => (
                   <option key={city} value={city}>
                     {city}
@@ -104,38 +112,48 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
               <label className={styles.label} htmlFor="startDate">
                 <sup className={styles.sup}>*</sup>Start date
               </label>
-              <input
-                className={styles.formInput}
-                type="text"
-                name="startDate"
-                id="startDate"
-                placeholder="Select date"
-                value={formData.startDate}
-                onChange={handleChange}
-                onFocus={e => (e.target.type = 'date')}
-                onBlur={e => (e.target.type = 'date')}
-                min={minDate}
-                max={maxDate}
-              />
+              <div style={{ position: 'relative' }}>
+                <input
+                  className={styles.formInput}
+                  type="text"
+                  name="startDate"
+                  id="startDate"
+                  placeholder="Select date"
+                  value={formData.startDate}
+                  onChange={handleChange}
+                  onFocus={e => (e.target.type = 'date')}
+                  onBlur={e => (e.target.type = 'date')}
+                  min={minDate}
+                  max={maxDate}
+                />
+                <button type="button" className={styles.openButton}>
+                  📅
+                </button>
+              </div>
             </div>
 
             <div className={styles.formGroup}>
               <label className={styles.label} htmlFor="endDate">
                 <sup className={styles.sup}>*</sup>End date
               </label>
-              <input
-                className={styles.formInput}
-                type="text"
-                name="endDate"
-                id="endDate"
-                placeholder="Select date"
-                value={formData.endDate}
-                onChange={handleChange}
-                onFocus={e => (e.target.type = 'date')}
-                onBlur={e => (e.target.type = 'date')}
-                min={formData.startDate === '' ? minDate : formData.startDate}
-                max={maxDate}
-              />
+              <div style={{ position: 'relative' }}>
+                <input
+                  className={styles.formInput}
+                  type="text"
+                  name="endDate"
+                  id="endDate"
+                  placeholder="Select date"
+                  value={formData.endDate}
+                  onChange={handleChange}
+                  onFocus={e => (e.target.type = 'date')}
+                  onBlur={e => (e.target.type = 'date')}
+                  min={formData.startDate === '' ? minDate : formData.startDate}
+                  max={maxDate}
+                />
+                <button type="button" className={styles.openButton}>
+                  📅
+                </button>
+              </div>
             </div>
           </div>
 

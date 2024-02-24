@@ -6,7 +6,7 @@ import icons from '../../icons/WeatherIcons';
 import Countdown from '../CountDown/CountDown';
 
 interface Props {
-  city: string;
+  city: string | undefined;
   startDate: string;
   isActive?: boolean;
 }

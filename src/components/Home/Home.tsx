@@ -146,17 +146,17 @@ const Home: React.FC = () => {
 
         {activeIndex && (
           <WeatherForecast
-            city={selectedTrip?.city || ''}
-            startDate={selectedTrip?.startDate || ''}
-            endDate={selectedTrip?.endDate || ''}
+            city={selectedTrip?.city ?? ''}
+            startDate={selectedTrip?.startDate ?? ''}
+            endDate={selectedTrip?.endDate ?? ''}
             isActive={activeIndex !== null}
           />
         )}
       </div>
 
       <WeatherToday
-        city={selectedTrip?.city || ''}
-        startDate={selectedTrip?.startDate || ''}
+        city={selectedTrip?.city}
+        startDate={selectedTrip?.startDate ?? ''}
         isActive={activeIndex !== null}
       />
 

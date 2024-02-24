@@ -19,8 +19,9 @@
 }
 
 .title {
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 30px;
 }
 
 .temp {
