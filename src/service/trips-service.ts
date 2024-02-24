@@ -11,8 +11,11 @@ interface ITrip {
 }
 
 export const addTrip = async (data: ITrip) => {
+  const storage = localStorage.getItem('uid');
+  if (!storage) return;
+
   const colRef = collection(db, 'trips');
-  const owner = JSON.parse(localStorage.getItem('userID') || '');
+  const owner: string = JSON.parse(storage);
 
   await addDoc(colRef, {
     ...data,

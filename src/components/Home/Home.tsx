@@ -1,4 +1,10 @@
-import React, { useState, useEffect, MouseEvent, FormEvent } from 'react';
+import React, {
+  useState,
+  useEffect,
+  MouseEvent,
+  FormEvent,
+  useContext,
+} from 'react';
 import { FaPlus } from 'react-icons/fa';
 import {
   collection,
@@ -7,9 +13,12 @@ import {
   query,
   onSnapshot,
 } from 'firebase/firestore';
+
 import styles from './Home.module.css';
 import { db } from '../../server/firebase';
 import auth from '../../service/auth';
+// Components
+import { AuthContext, defaultValue } from '../context/AuthContext';
 import CardItem from '../CardItem/CardItem';
 import CardList from '../CardList/CardList';
 import WeatherForecast from '../WeatherForecast/WeatherForecast';
@@ -18,25 +27,34 @@ import Modal from '../Modal/Modal';
 import Trip from '../Trip/Trip';
 import Filter from '../Filter/Filter';
 
-interface ITrip {
+type ITrip = {
   id: string;
   city: string;
   imageUrl: string;
   startDate: string;
   endDate: string;
   owner: string;
-}
+};
 
 const Home: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [trips, setTrips] = useState<ITrip[]>([]);
   const [filter, setFilter] = useState<string>('');
-
-  const [activeIndex, setActiveIndex] = useState<null | string>(null);
+  const [activeIndex, setActiveIndex] = useState<string | null>(null);
+  const context = useContext(AuthContext);
 
   const onFilterChange = (value: string): void => {
     setFilter(value);
     setActiveIndex(null);
+  };
+
+  const handleSignOut = async (): Promise<void> => {
+    try {
+      await auth.signOutWithGoogle();
+      context?.setUser(defaultValue);
+    } catch (error) {
+      alert('Oops, something went wrong. Please refresh the page.');
+    }
   };
 
   // open modal fn
@@ -50,14 +68,17 @@ const Home: React.FC = () => {
       | MouseEvent<HTMLDivElement | HTMLButtonElement>
       | FormEvent<HTMLFormElement>
       | KeyboardEvent
-  ) => {
+  ): void => {
     e.stopPropagation();
     setIsModalOpen(false);
   };
 
   // get data from firebase
   useEffect(() => {
-    const userId = JSON.parse(localStorage.getItem('userID') ?? '');
+    const storageData: string | null = localStorage.getItem('uid');
+    if (!storageData) return;
+
+    const userId: string = JSON.parse(storageData);
     const colRef = collection(db, 'trips');
     const q = query(
       colRef,
@@ -78,12 +99,14 @@ const Home: React.FC = () => {
   }, []);
 
   // filter trips
-  const filteredTrips = trips.filter(trip =>
+  const filteredTrips: ITrip[] = trips.filter(trip =>
     trip.city.toLowerCase().includes(filter.toLowerCase())
   );
 
   // get trip data which is selected
-  const selectedTrip = trips.find(trip => trip.id === activeIndex);
+  const selectedTrip: ITrip | undefined = trips.find(
+    trip => trip.id === activeIndex
+  );
 
   return (
     <>
@@ -92,7 +115,7 @@ const Home: React.FC = () => {
           <h1 className={styles.title}>
             Weather <span className={styles.span}>Forecast</span>
           </h1>
-          <button className={styles.logout} onClick={auth.signOutWithGoogle}>
+          <button className={styles.logout} onClick={handleSignOut}>
             Logout
           </button>
         </div>

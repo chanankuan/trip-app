@@ -11,13 +11,13 @@ interface Props {
   isActive?: boolean;
 }
 
-const WeatherForecast: React.FC<Props> = ({
-  city,
-  startDate,
-  endDate,
-  // isActive,
-}) => {
-  const [data, setData] = useState({ city: '', forecast: [] });
+type Weather = {
+  city: string;
+  forecast: never[];
+};
+
+const WeatherForecast: React.FC<Props> = ({ city, startDate, endDate }) => {
+  const [data, setData] = useState<Weather>({ city: '', forecast: [] });
 
   useEffect(() => {
     getForecastWeather(city, startDate, endDate).then(data =>

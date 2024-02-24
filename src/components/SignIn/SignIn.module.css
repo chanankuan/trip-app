@@ -4,24 +4,30 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: lightblue;
-  padding: 100px;
+  background: url('../../assets/AdobeStock_701834926.jpeg') left no-repeat;
+  background-size: cover;
+  padding: 300px;
 }
 
 .title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  color: #fff;
   text-align: center;
 }
 
 .signIn {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
   border: 0;
   border-radius: 4px;
   font-weight: 600;
-  margin: 0 10px;
   width: 200px;
   padding: 10px 0;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
@@ -33,7 +39,6 @@
 
 .signIn:hover {
   color: white;
-  width: ;
   box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
   background-color: rgba(104, 85, 224, 1);
 }

@@ -5,8 +5,15 @@ interface Props {
   startDate: Date;
 }
 
+type Time = {
+  days: string;
+  hours: string;
+  minutes: string;
+  seconds: string;
+};
+
 const Countdown: React.FC<Props> = ({ startDate }) => {
-  const [timeLeft, setTimeLeft] = useState({
+  const [timeLeft, setTimeLeft] = useState<Time>({
     days: '0',
     hours: '0',
     minutes: '0',
@@ -15,15 +22,16 @@ const Countdown: React.FC<Props> = ({ startDate }) => {
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const now = new Date().getTime();
-      const difference = startDate.getTime() - now;
-
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
+      const now: number = new Date().getTime();
+      const difference: number = startDate.getTime() - now;
+      const days: number = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours: number = Math.floor(
         (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      const minutes: number = Math.floor(
+        (difference % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds: number = Math.floor((difference % (1000 * 60)) / 1000);
 
       setTimeLeft({
         days: days.toString(),

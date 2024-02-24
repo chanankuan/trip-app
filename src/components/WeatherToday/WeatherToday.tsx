@@ -11,13 +11,13 @@ interface Props {
   isActive?: boolean;
 }
 
-interface IWeather {
+type Weather = {
   city: string;
   weather: { [key: string]: any };
-}
+};
 
 const WeatherToday: React.FC<Props> = ({ city, startDate, isActive }) => {
-  const [data, setData] = useState<IWeather>({ city: '', weather: {} });
+  const [data, setData] = useState<Weather>({ city: '', weather: {} });
 
   useEffect(() => {
     getCurrentWeather(city).then(data =>

@@ -1,29 +1,39 @@
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import { auth } from '../server/firebase';
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signOut,
+} from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../server/firebase';
 
-const signInWithGoogle = async () => {
+const signInWithGoogle = async (): Promise<void> => {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
-    // The signed-in user info.
-    const user = result.user;
-    localStorage.setItem('userID', JSON.stringify(user.uid));
-    location.reload();
+    const { uid, email, displayName } = result.user;
+
+    const docRef = doc(db, 'users', uid);
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) {
+      await setDoc(doc(db, 'users', uid), {
+        fullName: displayName,
+        email,
+        uid,
+      });
+    }
+
+    localStorage.setItem('uid', JSON.stringify(uid));
   } catch (error) {
-    // Handle Errors here.
-    // const errorCode = error.code;
-    // const errorMessage = error.message;
-    // The email of the user's account used.
-    // const email = error.customData.email;
-    // The AuthCredential type that was used.
-    // const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
     alert('Oops, something went wrong. Please refresh the page.');
   }
 };
 
-const signOutWithGoogle = (): void => {
-  signOut(auth);
+const signOutWithGoogle = async (): Promise<void> => {
+  const auth = getAuth();
+  await signOut(auth);
+  localStorage.removeItem('uid');
 };
 
 export default { signInWithGoogle, signOutWithGoogle };

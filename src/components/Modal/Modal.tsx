@@ -12,22 +12,31 @@ interface Props {
   ) => void;
 }
 
-const Modal: React.FC<Props> = ({ onCloseModal }) => {
-  const [formData, setFormData] = useState({
-    city: '',
-    imageUrl: '',
-    startDate: '',
-    endDate: '',
-  });
+type ITrip = {
+  city: string;
+  imageUrl: string;
+  startDate: string;
+  endDate: string;
+};
 
-  const today = new Date();
-  const fortnight = new Date(Date.now() + 1000 * 60 * 60 * 24 * 14);
-  const minDate = today.toISOString().split('T')[0];
-  const maxDate = fortnight.toISOString().split('T')[0];
+const initialData: ITrip = {
+  city: '',
+  imageUrl: '',
+  startDate: '',
+  endDate: '',
+};
+
+const Modal: React.FC<Props> = ({ onCloseModal }) => {
+  const [formData, setFormData] = useState<ITrip>(initialData);
+
+  const today: Date = new Date();
+  const fortnight: Date = new Date(Date.now() + 1000 * 60 * 60 * 24 * 14);
+  const minDate: string = today.toISOString().split('T')[0];
+  const maxDate: string = fortnight.toISOString().split('T')[0];
 
   const handleChange = (
     event: FormEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  ): void => {
     const { name, value } = event.currentTarget;
 
     setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
@@ -37,19 +46,18 @@ const Modal: React.FC<Props> = ({ onCloseModal }) => {
     setFormData(prevFormDate => ({ ...prevFormDate, endDate: '' }));
   }
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
 
     try {
       await addTrip(formData);
 
-      setFormData({
-        city: '',
-        imageUrl: '',
-        startDate: '',
-        endDate: '',
-      });
-    } catch (error) {}
+      setFormData(initialData);
+    } catch (error) {
+      alert('Oops, something went wrong. Please refresh the page.');
+    }
 
     onCloseModal(event);
   };

@@ -23,7 +23,7 @@ const Trip: React.FC<Props> = ({
   id,
   onShow,
 }) => {
-  const datetime = `${changeDateFormat(startDate)} - ${changeDateFormat(
+  const datetime: string = `${changeDateFormat(startDate)} - ${changeDateFormat(
     endDate
   )}`;
   return (
