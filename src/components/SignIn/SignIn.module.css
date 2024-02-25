@@ -4,8 +4,8 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: url('../../assets/AdobeStock_701834926.jpeg') left no-repeat;
-  background-size: cover;
+  background: url('../../assets/AdobeStock_701834926.jpeg') no-repeat;
+  background-size: 200%;
   padding: 300px 0;
 }
 

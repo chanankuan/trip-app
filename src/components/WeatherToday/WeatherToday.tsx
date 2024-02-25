@@ -12,7 +12,7 @@ interface Props {
 }
 
 type Weather = {
-  city: string;
+  city: string | undefined;
   weather: { [key: string]: any };
 };
 
@@ -20,9 +20,11 @@ const WeatherToday: React.FC<Props> = ({ city, startDate, isActive }) => {
   const [data, setData] = useState<Weather>({ city: '', weather: {} });
 
   useEffect(() => {
-    getCurrentWeather(city).then(data =>
-      setData({ city: data.address, weather: data.days[0] })
-    );
+    getCurrentWeather(city).then(data => {
+      const zone: string = data.timezone;
+      const city: string | undefined = zone.split('/').pop();
+      setData({ city, weather: data.days[0] });
+    });
   }, [city]);
 
   const { datetime, temp, icon } = data.weather;

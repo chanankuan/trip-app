@@ -1,12 +1,11 @@
 import axios from 'axios';
 import { getCurrentLocation } from '../helpers/getCurrentLocation';
 
-const WEATHER_API = import.meta.env.VITE_REACT_WEATHER_API;
-const OPEN_WEATHER_API = import.meta.env.VITE_REACT_OPEN_WEATHER_API;
-const BASE_URL =
+axios.defaults.baseURL =
   'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/';
 
-// API for getting today's weather for the city
+const WEATHER_API = import.meta.env.VITE_REACT_WEATHER_API;
+
 export const getCurrentWeather = async (city: string | undefined) => {
   let location: string;
 
@@ -14,13 +13,8 @@ export const getCurrentWeather = async (city: string | undefined) => {
   if (city === undefined) {
     // Fetch user's current location using the Geolocation API
     try {
-      const position = await getCurrentLocation();
-      const lat: number = position.coords.latitude;
-      const lon: number = position.coords.longitude;
-      const { data } = await axios.get(
-        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${OPEN_WEATHER_API}`
-      );
-      location = data[0].name;
+      const position: any = await getCurrentLocation();
+      location = `${position.coords.latitude},${position.coords.longitude}`;
     } catch (error) {
       console.error('Error getting user location:', error);
       // Use a default value or handle the error as needed
@@ -32,12 +26,12 @@ export const getCurrentWeather = async (city: string | undefined) => {
 
   try {
     const { data } = await axios.get(
-      `${BASE_URL}${location}/today?unitGroup=metric&include=days&key=${WEATHER_API}&contentType=json`
+      `${location}/today?unitGroup=metric&include=days&key=${WEATHER_API}&contentType=json`
     );
+
     return data;
   } catch (error) {
-    console.error('Error fetching weather data:', error);
-    // Handle the error as needed
+    alert('Oops, something went wrong. Please refresh the page.');
   }
 };
 
@@ -47,7 +41,7 @@ export const getForecastWeather = async (
   endDate: string
 ) => {
   const { data } = await axios.get(
-    `${BASE_URL}${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=${WEATHER_API}&contentType=json`
+    `${city}/${startDate}/${endDate}?unitGroup=metric&include=days&key=${WEATHER_API}&contentType=json`
   );
 
   return data;

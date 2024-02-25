@@ -5,13 +5,15 @@ import SignIn from './components/SignIn/SignIn';
 import { AuthContext, defaultValue } from './components/context/AuthContext';
 import { IUser } from './components/context/AuthContext';
 import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
+import Loader from './Loader/Loader';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<IUser>(defaultValue);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const auth: Auth = getAuth();
-
     const unsubscribe = onAuthStateChanged(auth, user => {
       if (user) {
         // User is signed in
@@ -20,18 +22,20 @@ const App: React.FC = () => {
           email: user.email,
           id: user.uid,
         });
-      } else {
-        // User is signed out
-        setUser(defaultValue);
       }
     });
+    setIsLoading(false);
 
     return () => unsubscribe();
   }, []);
 
+  console.log(isLoading);
+
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      {user.email ? <Home /> : <SignIn />}
+      {isLoading && <Loader />}
+      {user.email && <Home />}
+      {!user.email && !isLoading && <SignIn />}
     </AuthContext.Provider>
   );
 };
