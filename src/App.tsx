@@ -4,8 +4,8 @@ import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
 import { AuthContext, defaultValue } from './components/context/AuthContext';
 import { IUser } from './components/context/AuthContext';
-import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
-import Loader from './Loader/Loader';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import Loader from './components/Loader/Loader';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<IUser>(defaultValue);
@@ -13,7 +13,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const auth: Auth = getAuth();
+    const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, user => {
       if (user) {
         // User is signed in
@@ -23,13 +23,11 @@ const App: React.FC = () => {
           id: user.uid,
         });
       }
+      setIsLoading(false);
     });
-    setIsLoading(false);
 
     return () => unsubscribe();
   }, []);
-
-  console.log(isLoading);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

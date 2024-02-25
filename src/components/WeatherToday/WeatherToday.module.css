@@ -1,31 +1,25 @@
 .container {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 40vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 20px;
+  text-align: center;
   background: url('/src//assets//clouds.jpeg') center no-repeat;
   background-size: cover;
+  min-height: 150px;
 }
 
 .wrapper {
   display: flex;
+  justify-content: center;
   column-gap: 10px;
-  margin-bottom: 20px;
 }
 
 .title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 500;
   margin-bottom: 30px;
 }
 
 .temp {
-  font-size: 48px;
+  font-size: 36px;
 }
 
 .temp > sup {
@@ -34,6 +28,37 @@
 }
 
 .city {
-  font-size: 24px;
-  margin-bottom: 100px;
+  font-size: 20px;
+  margin-bottom: 50px;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wrapper {
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .temp {
+    font-size: 48px;
+  }
+
+  .city {
+    font-size: 24px;
+    margin-bottom: 100px;
+  }
 }

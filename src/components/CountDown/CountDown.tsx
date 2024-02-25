@@ -12,16 +12,18 @@ type Time = {
   seconds: string;
 };
 
+const defaultTimeLeft: Time = {
+  days: '0',
+  hours: '0',
+  minutes: '0',
+  seconds: '0',
+};
+
 const Countdown: React.FC<Props> = ({ startDate }) => {
-  const [timeLeft, setTimeLeft] = useState<Time>({
-    days: '0',
-    hours: '0',
-    minutes: '0',
-    seconds: '0',
-  });
+  const [timeLeft, setTimeLeft] = useState<Time>(defaultTimeLeft);
 
   useEffect(() => {
-    const calculateTimeLeft = () => {
+    const calculateTimeLeft = (): void => {
       const now: number = new Date().getTime();
       const difference: number = startDate.getTime() - now;
       const days: number = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -33,13 +35,18 @@ const Countdown: React.FC<Props> = ({ startDate }) => {
       );
       const seconds: number = Math.floor((difference % (1000 * 60)) / 1000);
 
-      setTimeLeft({
-        days: days.toString(),
-        hours: hours.toString().padStart(2, '0'),
-        minutes: minutes.toString().padStart(2, '0'),
-        seconds: seconds.toString().padStart(2, '0'),
-      });
+      if (difference < 0) {
+        setTimeLeft(defaultTimeLeft);
+      } else {
+        setTimeLeft({
+          days: days.toString(),
+          hours: hours.toString().padStart(2, '0'),
+          minutes: minutes.toString().padStart(2, '0'),
+          seconds: seconds.toString().padStart(2, '0'),
+        });
+      }
     };
+
     calculateTimeLeft();
     const intervalId = setInterval(calculateTimeLeft, 1000);
 

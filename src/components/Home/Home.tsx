@@ -108,6 +108,12 @@ const Home: React.FC = () => {
 
   return (
     <>
+      <WeatherToday
+        city={selectedTrip?.city}
+        startDate={selectedTrip?.startDate ?? ''}
+        isActive={activeIndex !== null}
+      />
+
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>
@@ -154,11 +160,11 @@ const Home: React.FC = () => {
         )}
       </div>
 
-      <WeatherToday
+      {/* <WeatherToday
         city={selectedTrip?.city}
         startDate={selectedTrip?.startDate ?? ''}
         isActive={activeIndex !== null}
-      />
+      /> */}
 
       {isModalOpen && <Modal onCloseModal={closeModal} />}
     </>

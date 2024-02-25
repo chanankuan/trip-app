@@ -3,6 +3,7 @@ import { FaRegTrashCan } from 'react-icons/fa6';
 import styles from './Trip.module.css';
 import changeDateFormat from '../../helpers/changeDateFormat';
 import { deleteTrip } from '../../service/trips-service';
+import { IconContext } from 'react-icons';
 
 interface Props {
   imageUrl: string;
@@ -36,7 +37,9 @@ const Trip: React.FC<Props> = ({
           className={styles.deleteBtn}
           onClick={(e: MouseEvent<HTMLButtonElement>) => deleteTrip(e, id)}
         >
-          <FaRegTrashCan />
+          <IconContext.Provider value={{ color: '#fff' }}>
+            <FaRegTrashCan />
+          </IconContext.Provider>
         </button>
       </div>
       <img

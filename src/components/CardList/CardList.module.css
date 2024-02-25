@@ -1,7 +1,21 @@
 .list {
   display: flex;
-  overflow-x: auto;
+  justify-content: center;
+  flex-wrap: wrap;
   column-gap: 40px;
+  row-gap: 40px;
   padding-bottom: 20px;
   margin-bottom: 50px;
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    display: flex;
+    justify-content: unset;
+    flex-wrap: unset;
+    overflow-x: auto;
+    column-gap: 40px;
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+  }
 }

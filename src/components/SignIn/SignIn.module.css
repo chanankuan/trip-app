@@ -5,8 +5,11 @@
   width: 100vw;
   height: 100vh;
   background: url('../../assets/AdobeStock_701834926.jpeg') no-repeat;
-  background-size: 200%;
+  background-size: auto 120%;
   padding: 300px 0;
+
+  @media screen and (min-width: 768px) {
+  }
 }
 
 .title {
